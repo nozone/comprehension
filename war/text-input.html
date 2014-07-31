@@ -1,0 +1,33 @@
+<link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="../components/paper-button/paper-button.html">
+
+<polymer-element name="text-input" attributes="defaultText">
+  <template>
+    <style>
+    .text-input input {
+      width: 80%;
+      margin: 20px;
+      font-size: 1.8rem;
+      font-weight: 300;
+    }
+
+    </style>
+
+    <div class="text-input" layout horizontal center>
+      <input id="text-input" value="{{defaultText}}">
+      <paper-button 
+        label="GO" 
+        raisedButton
+        on-tap="{{goTapped}}"></paper-button>
+    </div>
+    
+  </template>
+  <script>
+  Polymer('text-input',{
+    goTapped: function(event, detail, sender) {
+      console.log('tapped with ' + this.defaultText);
+      this.fire('go-tap');
+    }
+  });
+  </script>
+</polymer-element>

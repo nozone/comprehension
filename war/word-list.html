@@ -1,0 +1,30 @@
+﻿<link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="../post-service/word-service.html">
+<link rel="import" href="noun-finder.html">
+
+<polymer-element name="word-list" attributes="words">
+  <template>
+    <style>
+    :host {
+      display: block;
+      width: 100%;
+    }
+    noun-finder {
+      margin-bottom: 30px;
+    }
+    </style>
+    
+    <div layout vertical center>
+      <template repeat="{{word in words}}">
+        <noun-finder>
+          <h2>{{word.word}}</h2>
+          <p>{{word.tag}}</p>
+        </noun-finder>
+      </template>
+    </div>
+  </template>
+  <script>
+  Polymer({});
+  </script>
+
+</polymer-element>

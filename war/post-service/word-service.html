@@ -1,0 +1,37 @@
+<link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="../components/core-ajax/core-ajax.html">
+
+<polymer-element name="word-service" attributes="words">
+  <template>
+    <style>
+    :host {
+      display: none;
+    }
+    </style>
+    <core-ajax id="ajax"
+      url="/tag"
+      params='{"text" : "{{text}}"}'
+      on-core-response="{{wordsLoaded}}"
+      handleAs="json">
+    </core-ajax>
+  </template>
+  <script>
+  Polymer('word-service', {
+    created: function() {
+      this.words = [];
+    },
+    wordsLoaded: function() {
+      // Make a copy of the loaded data
+      this.words = [];
+      this.words = this.$.ajax.response.slice(0);
+      console.log(this.words);
+    },
+    getPOS: function(text) {
+      console.log('Looking for POS of ' + text);
+      this.words = [];
+      this.text = text;
+      this.$.ajax.go();
+    }
+  });
+  </script>
+</polymer-element>

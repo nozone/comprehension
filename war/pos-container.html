@@ -1,0 +1,50 @@
+<link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="../components/paper-button/paper-button.html">
+<link rel="import" href="text-input.html">
+<link rel="import" href="word-list.html">
+<link rel="import" href="../post-service/word-service.html">
+
+
+<polymer-element name="pos-container">
+  <template>
+    <style>
+     :host {
+      display: block;
+      position: relative;
+      background-color: white;
+      padding: 20px;
+      width: 100%;
+      font-size: 1.2rem;
+      font-weight: 300;
+    }
+
+    .word-list-container {
+      width: 80%;
+      margin: 50px auto;
+    }
+
+    </style>
+
+    <word-service id="service" words="{{words}}"></word-service>
+
+    <div class="text-input-container" layout vertical center>
+      <text-input defaultText="{{textInput}}" on-go-tap="{{handleFindPOS}}"/>
+    </div>
+
+    <div class="word-list-container" layout vertical center>
+      <word-list words="{{words}}"></word-list>
+    </div>
+
+  </template>
+
+  <script>
+  Polymer('pos-container',{
+    textInput: 'Enter text to find POS here',
+    handleFindPOS: function(event, detail, sender) {
+      console.log('pos container reporting tap with ' + this.textInput);
+      this.$.service.getPOS(this.textInput);
+      this.posList = this.words;
+    }
+  });
+  </script>
+</polymer-element>
